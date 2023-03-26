@@ -41,4 +41,3 @@ urunler={
 
 sonuc= urunler[100]["urunFiyati"]
 tutar= urunler[100]["urunFiyati"][0] +urunler[101]["urunFiyati"][0]
-print(tutar

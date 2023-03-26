@@ -69,8 +69,8 @@ print('the result is {n:1.3}'.format(n=number))
 
 yazi='merhaba herkese.benim adım fatih dikici.20 yaşındayım'
 
-result=yazi.upper()
-result=yazi.lower()
+"""result=yazi.upper()
+result=yazi.lower()"""
 result=yazi.islower()
 
 
