@@ -1,24 +1,14 @@
-"""
-ad=input("adinizi giriniz")
-print("hosgeldiniz ", ad)
-"""
-"""
-kacKarakter=len(ad)
-print("isminiz  {} karakterden olusuyor".format(kacKarakter))
-"""
+kullaniciadi="FMDikici"
+kullaniciparola=123456
 
-vize=int(input("vize notunuzu giriniz:"))
-final=int(input("final notunuzu giriniz:"))
+ad=input("kullanici adinizi giriniz: ")
+parola=int(input("parolayi giriniz: "))
 
-ort= vize*0.4+final*0.6
-
-if(ort>=80):
-    print("AA ile geçtiniz")
-elif(ort<80 and ort>=60):
-    print("BB ile geçtiniz")
-elif(ort<60 and ort>=40):
-    print("CC ile geçtiniz")
-elif(ort<40 and ort>=20):
-    print("DD ile şartli geçtiniz")
+if ((ad==kullaniciadi) and(parola==kullaniciparola)):
+    print("Hos Geldiniz!")
+elif ((ad!=kullaniciadi) and (parola==kullaniciparola)):
+    print("Kullanici Adi yanlis")
+elif((ad==kullaniciadi) and (parola!=kullaniciparola)):
+    print("Parola Yanlis")
 else:
-    print("FF ile kaldiniz")     
+    print("Tekrar Deneyiniz!")
