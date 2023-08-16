@@ -1,107 +1,106 @@
-bakiye=input("bakiye giriniz:")
-print("Banka Hesabindaski Bakiye {}".format(bakiye))
+class BankaHesabi:
+    def __init__(self, hesap_numarasi, sahip_adi, bakiye=0):
+        self.hesap_numarasi = hesap_numarasi
+        self.sahip_adi = sahip_adi
+        self.bakiye = bakiye
 
-print("lutfen yapmak istediginiz islemi seciniz:")
-print("1.para yatirma\n2.para cekme\n3.doviz islemleri\n4.altin islemleri")
-sec=input("yapilan secim:")
-
-if (sec==1):
-    print("Yatirilacak para miktarini giriniz:")
-    yatirilacak=input()
-    print("Lutfen Bekleyiniz...")
-    print("Sayim Yapiliyor")
-    print("Başarili..!")
-    bakiye=yatirilacak+bakiye
-    print("Yeni Bakiyeniz {}".format(bakiye))
-
-elif(sec==2):
-    print("Cekilecek Para Tutari Nedir?")
-    cekilecek=input("Tutar:")
-    bakiye=bakiye-cekilecek
-    print("Lutfen Bekleyiniz..")
-    print("Sayim Yapiliyor..")
-    if(bakiye>=0):
-        print("Basarili")
-    else:
-        print("Bakiyeniz Bu Duruma Uygun Degil! Kartinizi Tekrar Vermeye Calisiyoruz..")
-        print("Bizi Tercih Ettiginiz İcin Tesekkur Ederiz..")
-
-elif(sec==3):
-    print("Yapmak İstediginiz İslem Doviz Almak mi[1], Satmak Mi[2]?")
-    islem=input()
-    if(islem==1):
-        print("Yapmak istediğiniz Doviz Birimi hangisidir?")
-        print("1.Euro\n2.Dolar")
-        dovizsec1=int(input())
-        if(dovizsec1==1):
-            print("Su an güncel Euro Alimi '21,2824TL' ") 
-            print("Kaynak:'https://www.isbank.com.tr/doviz-kurlari'")
-            print("Almak İstediginiz Tutari Giriniz:")
-            alim=input()
-            eurotutar=alim*21.2824
-            bakiye=bakiye-eurotutar
-            if(bakiye>0):
-                print("Basarili")
-            else:
-                print("lutfen Bekleyiniz..")
-                print("Bakiyeniz Bu islem icin Uygun Degildir!")
-                print("Bizi Tercih Ettiginiz İcin Tesekkur Ederiz..")
-        elif(dovizsec1==2):
-            print("Su an güncel Dolar Alimi '19,5197TL' ") 
-            print("Kaynak:'https://www.isbank.com.tr/doviz-kurlari'")
-            print("Almak İstediginiz Tutari Giriniz:")
-            alim=float(input())
-            dolartutar=alim*19.5197
-            bakiye=bakiye-dolartutar
-            if(bakiye>=0):
-                print("Basarili")
-            else:
-                print("lutfen Bekleyiniz..")
-                print("Bakiyeniz Bu islem icin Uygun Degildir!")
-                print("Bizi Tercih Ettiginiz İcin Tesekkur Ederiz..")
-    
-    elif(islem==2):
-        print("Yapmak istediğiniz Doviz Birimi hangisidir?")
-        print("1.Euro\n2.Dolar")
-        dovizsec=int(input())
-        if(dovizsec==1):
-            print("Su an güncel Euro Satimi '20,884TL' ") 
-            print("Kaynak:'https://www.isbank.com.tr/doviz-kurlari'")
-            print("Satmak İstediginiz Tutari Giriniz:")
-            satim=input()
-            eurotutar=satim*21.2824
-            bakiye=bakiye+eurotutar
-            print("Basarili. Yeni Bakiyeniz {}".format(bakiye))
-        elif(dovizsec==2):
-            print("Su an güncel Dolar Satimi '19.1543TL' ") 
-            print("Kaynak:'https://www.isbank.com.tr/doviz-kurlari'")
-            print("Satmak İstediginiz Tutari Giriniz:")
-            satim=input()
-            dolartutar=alim*19.5197
-            bakiye=bakiye+dolartutar
-            print("Basarili. Yeni Bakiyeniz{}".format(bakiye))
-elif(sec==4):
-    print("Altin Almak Mi[1] Yoksa Satmak Mi[2] İstersiniz")
-    secim=input()
-    if(secim==1):
-        print("Lutfen Bekleyiniz..")
-        print("Alim fiyatlari:'1249.68TL'")
-        print("Kaynak: https://altin.doviz.com/gram-altin")
-        print("Kac Gram Almak İstiyorsunuz?")
-        altinalim=input()
-        altinalim=altinalim*1249.68
-        bakiye=bakiye-altinalim
-        if(bakiye>0):
-            print("başarili..")
+    def para_yatir(self, miktar):
+        if miktar >= 0:
+            self.bakiye += miktar
+            print(f"{miktar} birim yatirildi. Yeni Bakiye: {self.bakiye}")
         else:
-            print("Bakiyeniz Bunun İcin Yeterli Değildir..")
-            print("bizi Tercih Ettiginiz İcin Tesekkurler..")
-    elif(secim==2):
-        print("Lutfen Bekleyiniz..")
-        print("Satis fiyatlari:'1248,85TL'")
-        print("Kaynak: https://altin.doviz.com/gram-altin")
-        print("Kac Gram Satmak İstiyorsunuz?")
-        altinsatim=input()
-        bakiye=bakiye+altinsatim
-        print("Yeni Bakiyeniz{}".format(bakiye))
+            print("Geçersiz yatirma miktari")
+
+    def para_cek(self, miktar):
+        if miktar >= 0:
+            if self.bakiye - miktar < 0:
+                print("Hesapta yeterli bakiye bulunmamaktadır.")
+            else:
+                self.bakiye -= miktar
+                print(f"{miktar} para hesabınızdan çekildi. Yeni bakiye: {self.bakiye}")
+        else:
+            print("Geçersiz çekim miktarı")
+
+    def bakiye_sorgula(self):
+        return self.bakiye
+
+    def __str__(self):
+        return f"Hesap Numarası: {self.hesap_numarasi}\nSahip: {self.sahip_adi}\nBakiye: {self.bakiye}"
+
+def ana_program():
+    hesaplar = []
+
+    while True:
+        print("\nBanka ATM Menüsü:")
+        print("1. Hesap oluştur")
+        print("2. Varolan bir hesaba eriş")
+        print("3. Çikiş")
+
+        secim = input("Seçiminizi girin: ")
+
+        if secim == "1":
+            hesap_numarasi = input("Hesap numarasini girin: ")
+            sahip_adi = input("Sahibin adini girin: ")
+            hesap = BankaHesabi(hesap_numarasi, sahip_adi)
+            hesaplar.append(hesap)
+            print("Hesap başariyla oluşturuldu")
+
+        elif secim == "2":
+            hesap_numarasi = input("Hesap numarasini girin: ")
+            secilen_hesap = None
+            for hesap in hesaplar:
+                if hesap.hesap_numarasi == hesap_numarasi:
+                    secilen_hesap = hesap
+                    break
+            if secilen_hesap:
+                print(str(secilen_hesap))
+
+                while True:
+                    print("\nHesap Menüsü:")
+                    print("1. Para Yatir")
+                    print("2. Para Çek")
+                    print("3. Bakiye Sorgula")
+                    print("4. Hesaptan Çik")
+
+                    alt_secim = input("Seçiminizi girin: ")
+
+                    if alt_secim == "1":
+                        try:
+                            miktar = float(input("Yatirilacak miktari girin: "))
+                            secilen_hesap.para_yatir(miktar)
+                        except ValueError:
+                            print("Geçersiz miktar girişi")
+
+                    elif alt_secim == "2":
+                        try:
+                            miktar = float(input("Çekilecek miktari girin: "))
+                            secilen_hesap.para_cek(miktar)
+                        except ValueError:
+                            print("Geçersiz miktar girişi")
+
+                    elif alt_secim == "3":
+                        print(f"Mevcut bakiye: {secilen_hesap.bakiye_sorgula()}")
+
+                    elif alt_secim == "4":
+                        break
+
+                    else:
+                        print("Geçersiz seçim.")
+
+            else:
+                print("Hesap bulunamadi.")
+
+        elif secim == "3":
+            print("ATM'den çikiliyor. İyi günler!")
+            break
+
+        else:
+            print("Geçersiz seçim.")
+
+if __name__ == "__main__":
+    ana_program() #burada chatgpt yardımı var anlamadım ne oldugunu
+
+                
+
+
 
